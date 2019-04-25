@@ -87,14 +87,29 @@ def Extrair(zipLista):
 
 
 
+                        #encurta diretorio se n for o suficiente
+                        MAX_LEN_SRT_NOME = (247-len(os.path.dirname(os.path.join(o_dir, srt.filename))))
+                        SRT_FILENAME_LEN = len(os.path.split(srt.filename)[1])
+                        srt_filename_dir, srt_filename = os.path.split(srt.filename)
+                        if SRT_FILENAME_LEN > MAX_LEN_SRT_NOME:
+
+                            srt_filename = srt_filename[:(int(MAX_LEN_SRT_NOME / 2) - 4) + int(MAX_LEN_SRT_NOME % 2)] +"..."+ srt_filename[SRT_FILENAME_LEN - int(MAX_LEN_SRT_NOME / 2) :]
+                            srt.filename = os.path.join(srt_filename_dir,srt_filename)
+
+
+
+
                         if not os.path.exists(os.path.dirname(os.path.join(o_dir, srt.filename))):
 
                             try:
                                 os.makedirs(os.path.dirname(os.path.join(o_dir, srt.filename)))
 
                             except OSError as e:
+
                                 if e.errno != errno.EEXIST:
                                     raise
+
+
 
                         with open(os.path.join(o_dir,srt.filename),"wb") as o_file:
                             while True:
@@ -130,6 +145,16 @@ def Extrair(zipLista):
 
                     SRT_PARTE = 200 * 1024
                     with zip_arq.open(srt) as srt_dados:
+
+
+                        #encurta diretorio se n for o suficiente
+                        MAX_LEN_SRT_NOME = (247-len(os.path.dirname(os.path.join(o_dir, srt.filename))))
+                        SRT_FILENAME_LEN = len(os.path.split(srt.filename)[1])
+                        srt_filename_dir, srt_filename = os.path.split(srt.filename)
+                        if SRT_FILENAME_LEN > MAX_LEN_SRT_NOME:
+                            srt_filename = srt_filename[:(int(MAX_LEN_SRT_NOME / 2) - 4) + int(MAX_LEN_SRT_NOME % 2)] +"..."+ srt_filename[SRT_FILENAME_LEN - int(MAX_LEN_SRT_NOME / 2) :]
+                            srt.filename = os.path.join(srt_filename_dir,srt_filename)
+
 
                         if not os.path.exists(os.path.dirname(os.path.join(o_dir, srt.filename))):
 
