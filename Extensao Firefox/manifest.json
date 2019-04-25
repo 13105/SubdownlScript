@@ -1,0 +1,45 @@
+{
+	"manifest_version":	2,
+	"name":	"SubsDownl",
+	"version": "2.8.2",
+	"author":"B105",
+
+	"description": "Sopa de makako, uma delisia",
+	"applications": {
+		"gecko": {
+			"id":"subdownl@subdownl"
+		}
+	},
+
+	"permissions": [
+		"*://legendei.com/*",
+		"*://*.opensubtitles.org/*",
+		"cookies"
+	],
+
+	"icons":{
+		"48":"icon/48x48.png",
+		"96":"icon/96x96.png"
+
+	},
+
+  "content_scripts": [
+    {
+      "matches":["*://*.opensubtitles.org/*/ssearch/*"],
+      "js":["js/opensubtitles.js"],
+			"css":["a.css"]
+    },
+
+		{
+      "matches":["*://legendei.com/*"],
+      "js":["js/legendei.js"],
+			"css":["a.css"]
+    }
+
+  ]
+
+
+
+
+
+}
